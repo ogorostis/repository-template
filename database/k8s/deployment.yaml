@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: fly-database
+  name: fly-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fly-database
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: fly-database
+    spec:
+      containers:
+      - image: docker.io/rocketlawyer/fly-database
+        name: fly-database
+        resources: {}
+status: {}
