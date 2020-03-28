@@ -24,6 +24,7 @@ Migrating schema "public" to version 2.1 - more data
 Successfully applied 3 migrations to schema "public" (execution time 00:00.080s)
 ```
 
+Check database
 ```
 mytestdb=> select * from flyway_schema_history;
  installed_rank | version | description | type |       script        |  checksum   | installed_by |        installed_on        | execution_time | success
