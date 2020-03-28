@@ -1,0 +1,11 @@
+apiVersion: skaffold/v2beta1
+kind: Config
+metadata:
+  name: database
+build:
+  artifacts:
+  - image: docker.io/rocketlawyer/fly-database
+deploy:
+  kubectl:
+    manifests:
+    - k8s/deployment.yaml
