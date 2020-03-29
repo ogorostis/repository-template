@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pg-test-config
+  labels:
+    app: postgres
+data:
+  POSTGRES_DB: pg-test-db
+  POSTGRES_USER: pg-test-user
+  POSTGRES_PASSWORD: pg-test-pass
+
