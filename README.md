@@ -34,3 +34,32 @@ mytestdb=> select * from flyway_schema_history;
               3 | 2.1     | more data   | SQL  | V2.1__more_data.sql |  -389802888 | myuser       | 2020-03-28 19:10:10.851169 |              2 | t
 (3 rows)
 ```
+
+## Test with postgres in minikube
+```
+cd postgres-sample
+```
+
+### Create Config Map
+```
+kubectl create -f pg-config-map.yaml
+```
+
+### Create Storage
+```
+kubectl create -f pg-storage.yaml
+persistentvolume/pg-test-pv-volume created
+persistentvolumeclaim/pg-test-pv-claim created
+```
+
+### Create Deployment
+```
+kubectl create -f pg-deployment.yaml
+deployment.apps/postgres created
+```
+
+### Create Service
+```
+kubectl create -f pg-service.yaml
+service/postgres created
+```
