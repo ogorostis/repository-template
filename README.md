@@ -63,3 +63,23 @@ deployment.apps/postgres created
 kubectl create -f pg-service.yaml
 service/postgres created
 ```
+
+### View
+```
+kubectl get all
+NAME                            READY   STATUS    RESTARTS   AGE
+pod/postgres-5c5f55d869-pz7jm   1/1     Running   0          22m
+pod/things-86d49cbd59-wjkzc     1/1     Running   1          3d2h
+
+
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+...
+```
+
+```
+kubectl exec -it postgres-5c5f55d869-pz7jm bash
+# psql -h localhost -p 5432 -d pg-test-db -U pg-test-user -W
+Password:
+psql (12.2 (Debian 12.2-2.pgdg100+1))
+Type "help" for help.
+```
