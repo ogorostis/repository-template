@@ -5,31 +5,18 @@
 docker pull postgres
 docker run -d -p 5432:5432 --name mypostgres -e POSTGRES_PASSWORD=pa55w0rd postgres
 
-docker ps
+➜ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-b3367c4a5d59        postgres            "docker-entrypoint.s…"   5 minutes ago       Up 5 minutes        0.0.0.0:5432->5432/tcp   mypostgres
-```
+d6f8dba8bf25        postgres            "docker-entrypoint.s…"   44 seconds ago      Up 43 seconds       0.0.0.0:5432->5432/tcp   mypostgres```
 
 Psql from within container:
 ```
 docker exec -it mypostgres bash
-root@b3367c4a5d59:/# cat /etc/hosts | grep b3367c4a5d59
-172.17.0.2	b3367c4a5d59
-
-root@b3367c4a5d59:/# psql -U postgres
+root@d6f8dba8bf25:/# cat /etc/hosts | grep d6f8dba8bf25
+172.17.0.2	d6f8dba8bf25
+root@d6f8dba8bf25:/# psql -U postgres
 psql (12.2 (Debian 12.2-2.pgdg100+1))
 Type "help" for help.
-
-postgres=# \l
-                                 List of databases
-   Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges
------------+----------+----------+------------+------------+-----------------------
- postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
- template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
-           |          |          |            |            | postgres=CTc/postgres
- template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
-           |          |          |            |            | postgres=CTc/postgres
-(3 rows)
 
 postgres=#
 ```
@@ -43,14 +30,7 @@ Type "help" for help.
 
 postgres=# create database mytestdb;
 CREATE DATABASE
-postgres=# create user myuser with
-postgres-#   login
-postgres-#   createdb
-postgres-#   createrole
-postgres-#   inherit
-postgres-#   noreplication
-postgres-#   connection limit -1
-postgres-#   password 'mypass';
+postgres=# create user myuser with login createdb createrole inherit noreplication connection limit -1 password 'mypass';
 CREATE ROLE
 postgres=# grant all privileges on database mytestdb to myuser;
 GRANT
@@ -67,6 +47,8 @@ postgres=# \l
  template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
            |          |          |            |            | postgres=CTc/postgres
 (4 rows)
+
+postgres=#
 ```
 
 ### Build flyway image that contains config and scripts
