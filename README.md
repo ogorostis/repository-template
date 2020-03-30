@@ -137,13 +137,12 @@ kubectl create -f pg-service.yaml
 service/postgres created
 ```
 
-### View
+### View from within container
 ```
 kubectl get all
 NAME                            READY   STATUS    RESTARTS   AGE
 pod/postgres-5c5f55d869-pz7jm   1/1     Running   0          22m
 pod/things-86d49cbd59-wjkzc     1/1     Running   1          3d2h
-
 
 NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
 ...
@@ -155,4 +154,22 @@ kubectl exec -it postgres-5c5f55d869-pz7jm bash
 Password:
 psql (12.2 (Debian 12.2-2.pgdg100+1))
 Type "help" for help.
+```
+
+### View from host
+```
+kubectl get services
+NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP          4d19h
+postgres     NodePort    10.109.195.118   <none>        5432:30394/TCP   39h
+things       NodePort    10.96.1.178      <none>        8080:31491/TCP   4d17h
+```
+
+```
+➜ psql -h `minikube ip` -p 30394 -d pg-test-db -U pg-test-user -W
+Password:
+psql (12.2)
+Type "help" for help.
+
+pg-test-db=#
 ```
