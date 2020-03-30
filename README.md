@@ -166,7 +166,7 @@ things       NodePort    10.96.1.178      <none>        8080:31491/TCP   4d17h
 ```
 
 ```
-➜ psql -h `minikube ip` -p 30394 -d pg-test-db -U pg-test-user -W
+psql -h `minikube ip` -p 30394 -d pg-test-db -U pg-test-user -W
 Password:
 psql (12.2)
 Type "help" for help.
