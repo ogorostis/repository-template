@@ -8,6 +8,7 @@ docker run -d -p 5432:5432 --name mypostgres -e POSTGRES_PASSWORD=pa55w0rd postg
 ➜ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
 d6f8dba8bf25        postgres            "docker-entrypoint.s…"   44 seconds ago      Up 43 seconds       0.0.0.0:5432->5432/tcp   mypostgres```
+```
 
 Psql from within container:
 ```
@@ -23,7 +24,7 @@ postgres=#
 
 Psql from host:
 ```
-➜ psql -h localhost -p 5432 -U postgres -W
+psql -h localhost -p 5432 -U postgres -W
 Password:
 psql (12.2)
 Type "help" for help.
