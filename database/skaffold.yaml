@@ -1,7 +1,7 @@
 apiVersion: skaffold/v2beta1
 kind: Config
 metadata:
-  name: database
+  name: fly-database
 build:
   artifacts:
   - image: docker.io/rocketlawyer/fly-database
