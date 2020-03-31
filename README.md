@@ -178,12 +178,12 @@ pg-test-db=#
 ```
 skaffold run --tail
 Generating tags...
- - docker.io/rocketlawyer/fly-database -> docker.io/rocketlawyer/fly-database:78864a2-dirty
+ - docker.io/rocketlawyer/fly-database -> docker.io/rocketlawyer/fly-database:4fc3e3c-dirty
 Checking cache...
  - docker.io/rocketlawyer/fly-database: Not found. Building
 Found [minikube] context, using local docker daemon.
 Building [docker.io/rocketlawyer/fly-database]...
-Sending build context to Docker daemon  15.87kB
+Sending build context to Docker daemon   16.9kB
 Step 1/13 : FROM adoptopenjdk:11-jre-hotspot
  ---> 7394aeeb70de
 Step 2/13 : RUN adduser --system --home /flyway --disabled-password --group flyway
@@ -202,42 +202,42 @@ Step 6/13 : RUN curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-comma
  ---> Using cache
  ---> 3f6a04bee31f
 Step 7/13 : COPY config /tmp/config
- ---> b995a0762862
+ ---> 772d54729d49
 Step 8/13 : COPY sql /tmp/sql
- ---> b32a2f31c5ca
+ ---> 08f31f399401
 Step 9/13 : RUN mv /flyway/conf/flyway.conf /flyway/conf/flyway.conf.iniital && cp /tmp/config/flyway.conf /flyway/conf/flyway.conf
- ---> Running in a6ffe1bc575d
- ---> 573a536aa246
+ ---> Running in 5f9f4eb77b82
+ ---> a167762ba0c7
 Step 10/13 : RUN find /tmp/sql -name '*.sql' -exec cp {} /flyway/sql \;
- ---> Running in 7a76c6d58bfd
- ---> 07f0c4eb6475
+ ---> Running in fcbf1b564368
+ ---> ef39877e846f
 Step 11/13 : ENV PATH="/flyway:${PATH}"
- ---> Running in 26ee99617105
- ---> caff8e42024d
+ ---> Running in fa77ad464c13
+ ---> 61af5c185321
 Step 12/13 : ENTRYPOINT ["flyway"]
- ---> Running in d2b534e59029
- ---> 6895bfe9936c
+ ---> Running in b267fa09f42e
+ ---> b82fb6350c82
 Step 13/13 : CMD ["-?"]
- ---> Running in 71d78a4b6dc8
- ---> 9ecd380906ce
-Successfully built 9ecd380906ce
-Successfully tagged rocketlawyer/fly-database:78864a2-dirty
+ ---> Running in ccd25a6deba9
+ ---> 038ad9205ca3
+Successfully built 038ad9205ca3
+Successfully tagged rocketlawyer/fly-database:4fc3e3c-dirty
 Tags used in deployment:
- - docker.io/rocketlawyer/fly-database -> docker.io/rocketlawyer/fly-database:9ecd380906ced5887d4c70e1421f0b9d095db0b82cd60f3abef609c96c1e1fc2
+ - docker.io/rocketlawyer/fly-database -> docker.io/rocketlawyer/fly-database:038ad9205ca3f1ed5a33930fe10ef5dd399f569e73244d5d2baba71f5ebb61f7
    local images can't be referenced by digest. They are tagged and referenced by a unique ID instead
 Starting deploy...
  - job.batch/fly-database created
 Waiting for deployments to stabilize
-Deployments stabilized in 30.582197ms
-[fly-database-n6l6v fly-database] Flyway Community Edition 6.3.2 by Redgate
-[fly-database-n6l6v fly-database] Database: jdbc:postgresql://172.17.0.6:5432/pg-test-db (PostgreSQL 12.2)
-[fly-database-n6l6v fly-database] Successfully validated 3 migrations (execution time 00:00.023s)
-[fly-database-n6l6v fly-database] Creating Schema History table "public"."flyway_schema_history" ...
-[fly-database-n6l6v fly-database] Current version of schema "public": << Empty Schema >>
-[fly-database-n6l6v fly-database] Migrating schema "public" to version 1.1 - init
-[fly-database-n6l6v fly-database] Migrating schema "public" to version 1.2 - data
-[fly-database-n6l6v fly-database] Migrating schema "public" to version 2.1 - more data
-[fly-database-n6l6v fly-database] Successfully applied 3 migrations to schema "public" (execution time 00:00.044s)
+Deployments stabilized in 34.883873ms
+[fly-database-c4ldv fly-database] Flyway Community Edition 6.3.2 by Redgate
+[fly-database-c4ldv fly-database] Database: jdbc:postgresql://172.17.0.6:5432/pg-test-db (PostgreSQL 12.2)
+[fly-database-c4ldv fly-database] Successfully validated 3 migrations (execution time 00:00.033s)
+[fly-database-c4ldv fly-database] Creating Schema History table "public"."flyway_schema_history" ...
+[fly-database-c4ldv fly-database] Current version of schema "public": << Empty Schema >>
+[fly-database-c4ldv fly-database] Migrating schema "public" to version 1.1 - init
+[fly-database-c4ldv fly-database] Migrating schema "public" to version 1.2 - data
+[fly-database-c4ldv fly-database] Migrating schema "public" to version 2.1 - more data
+[fly-database-c4ldv fly-database] Successfully applied 3 migrations to schema "public" (execution time 00:00.049s)
 ```
 
 ### Check database
