@@ -98,11 +98,11 @@ psql (12.2)
 Type "help" for help.
 
 mytestdb=> select * from flyway_schema_history;
- installed_rank | version | description | type |       script        |  checksum   | installed_by |        installed_on        | execution_time | success
-----------------+---------+-------------+------+---------------------+-------------+--------------+----------------------------+----------------+---------
-              1 | 1.1     | init        | SQL  | V1.1_init.sql      | -1203431891 | myuser       | 2020-03-30 15:47:49.766175 |              5 | t
-              2 | 1.2     | data        | SQL  | V1.2_data.sql      |  -513598028 | myuser       | 2020-03-30 15:47:49.786407 |              3 | t
-              3 | 2.1     | more data   | SQL  | V2.1_more_data.sql |  -389802888 | myuser       | 2020-03-30 15:47:49.800814 |              1 | t
+ installed_rank | version | description | type |       script       |  checksum   | installed_by |        installed_on        | execution_time | success
+----------------+---------+-------------+------+--------------------+-------------+--------------+----------------------------+----------------+---------
+              1 | 1.1     | init        | SQL  | V1.1_init.sql      | -1203431891 | myuser       | 2020-03-31 22:44:13.880541 |              4 | t
+              2 | 1.2     | data        | SQL  | V1.2_data.sql      |  -513598028 | myuser       | 2020-03-31 22:44:13.896808 |              2 | t
+              3 | 2.1     | more data   | SQL  | V2.1_more_data.sql |  -389802888 | myuser       | 2020-03-31 22:44:13.907754 |              1 | t
 (3 rows)
 
 mytestdb=>
