@@ -17,12 +17,15 @@ COPY config /tmp/config
 COPY sql /tmp/sql
 
 # Add repository flyway configuration
-RUN mv /flyway/conf/flyway.conf /flyway/conf/flyway.conf.iniital && cp /tmp/config/flyway.conf /flyway/conf/flyway.conf
+# flyway.sqlMigrationSeparator seaprates Version and Description
+RUN mv /flyway/conf/flyway.conf /flyway/conf/flyway.conf.original \
+  && cp /tmp/config/flyway.conf /flyway/conf/flyway.conf \
+  && echo 'flyway.sqlMigrationSeparator=_' >> /flyway/conf/flyway.conf
 
 # Flatten sql directory so that database flyway_schema_history.script column
 # simply reflects filename without any directory (no collisions since they must all be prefixed a different version).
 RUN find /tmp/sql -name '*.sql' -exec cp {} /flyway/sql \;
-  
+
 ENV PATH="/flyway:${PATH}"
 
 ENTRYPOINT ["flyway"]
