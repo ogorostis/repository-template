@@ -176,7 +176,7 @@ pg-test-db=#
 
 ### Skaffold Run
 ```
-➜ skaffold run --tail
+skaffold run --tail
 Generating tags...
  - docker.io/rocketlawyer/fly-database -> docker.io/rocketlawyer/fly-database:78864a2-dirty
 Checking cache...
