@@ -176,9 +176,11 @@ pg-test-db=#
 
 ### Skaffold Run
 ```
+cd database
+
 skaffold run --tail
 Generating tags...
- - docker.io/rocketlawyer/fly-database -> docker.io/rocketlawyer/fly-database:4fc3e3c-dirty
+ - docker.io/rocketlawyer/fly-database -> docker.io/rocketlawyer/fly-database:6305fa0-dirty
 Checking cache...
  - docker.io/rocketlawyer/fly-database: Not found. Building
 Found [minikube] context, using local docker daemon.
@@ -202,42 +204,43 @@ Step 6/13 : RUN curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-comma
  ---> Using cache
  ---> 3f6a04bee31f
 Step 7/13 : COPY config /tmp/config
+ ---> Using cache
  ---> 772d54729d49
 Step 8/13 : COPY sql /tmp/sql
- ---> 08f31f399401
-Step 9/13 : RUN mv /flyway/conf/flyway.conf /flyway/conf/flyway.conf.iniital && cp /tmp/config/flyway.conf /flyway/conf/flyway.conf
- ---> Running in 5f9f4eb77b82
- ---> a167762ba0c7
+ ---> 2ae6aa932ebb
+Step 9/13 : RUN mv /flyway/conf/flyway.conf /flyway/conf/flyway.conf.original   && cp /tmp/config/flyway.conf /flyway/conf/flyway.conf   && echo 'flyway.sqlMigrationSeparator=_' >> /flyway/conf/flyway.conf
+ ---> Running in 7ef29726a15e
+ ---> dea23ebe9a7c
 Step 10/13 : RUN find /tmp/sql -name '*.sql' -exec cp {} /flyway/sql \;
- ---> Running in fcbf1b564368
- ---> ef39877e846f
+ ---> Running in d8d8275d243c
+ ---> 7aef8baaba91
 Step 11/13 : ENV PATH="/flyway:${PATH}"
- ---> Running in fa77ad464c13
- ---> 61af5c185321
+ ---> Running in b95de98d11cb
+ ---> f662c349a371
 Step 12/13 : ENTRYPOINT ["flyway"]
- ---> Running in b267fa09f42e
- ---> b82fb6350c82
+ ---> Running in c17491fa3a7d
+ ---> 88908d10d4d7
 Step 13/13 : CMD ["-?"]
- ---> Running in ccd25a6deba9
- ---> 038ad9205ca3
-Successfully built 038ad9205ca3
-Successfully tagged rocketlawyer/fly-database:4fc3e3c-dirty
+ ---> Running in 66189eda1d77
+ ---> 3e5be409f2fb
+Successfully built 3e5be409f2fb
+Successfully tagged rocketlawyer/fly-database:6305fa0-dirty
 Tags used in deployment:
- - docker.io/rocketlawyer/fly-database -> docker.io/rocketlawyer/fly-database:038ad9205ca3f1ed5a33930fe10ef5dd399f569e73244d5d2baba71f5ebb61f7
+ - docker.io/rocketlawyer/fly-database -> docker.io/rocketlawyer/fly-database:3e5be409f2fb56b5ec38ef0ae21e7a5cbb8eff032ce94bcefbcbebdceb04db89
    local images can't be referenced by digest. They are tagged and referenced by a unique ID instead
 Starting deploy...
  - job.batch/fly-database created
 Waiting for deployments to stabilize
-Deployments stabilized in 34.883873ms
-[fly-database-c4ldv fly-database] Flyway Community Edition 6.3.2 by Redgate
-[fly-database-c4ldv fly-database] Database: jdbc:postgresql://172.17.0.6:5432/pg-test-db (PostgreSQL 12.2)
-[fly-database-c4ldv fly-database] Successfully validated 3 migrations (execution time 00:00.033s)
-[fly-database-c4ldv fly-database] Creating Schema History table "public"."flyway_schema_history" ...
-[fly-database-c4ldv fly-database] Current version of schema "public": << Empty Schema >>
-[fly-database-c4ldv fly-database] Migrating schema "public" to version 1.1 - init
-[fly-database-c4ldv fly-database] Migrating schema "public" to version 1.2 - data
-[fly-database-c4ldv fly-database] Migrating schema "public" to version 2.1 - more data
-[fly-database-c4ldv fly-database] Successfully applied 3 migrations to schema "public" (execution time 00:00.049s)
+Deployments stabilized in 22.876763ms
+[fly-database-l8hsp fly-database] Flyway Community Edition 6.3.2 by Redgate
+[fly-database-l8hsp fly-database] Database: jdbc:postgresql://172.17.0.6:5432/pg-test-db (PostgreSQL 12.2)
+[fly-database-l8hsp fly-database] Successfully validated 3 migrations (execution time 00:00.026s)
+[fly-database-l8hsp fly-database] Creating Schema History table "public"."flyway_schema_history" ...
+[fly-database-l8hsp fly-database] Current version of schema "public": << Empty Schema >>
+[fly-database-l8hsp fly-database] Migrating schema "public" to version 1.1 - init
+[fly-database-l8hsp fly-database] Migrating schema "public" to version 1.2 - data
+[fly-database-l8hsp fly-database] Migrating schema "public" to version 2.1 - more data
+[fly-database-l8hsp fly-database] Successfully applied 3 migrations to schema "public" (execution time 00:00.042s)
 ```
 
 ### Check database
@@ -248,11 +251,11 @@ psql (12.2)
 Type "help" for help.
 
 pg-test-db=# select * from flyway_schema_history;
- installed_rank | version | description | type |       script        |  checksum   | installed_by |        installed_on        | execution_time | success
-----------------+---------+-------------+------+---------------------+-------------+--------------+----------------------------+----------------+---------
-              1 | 1.1     | init        | SQL  | V1.1_init.sql      | -1203431891 | pg-test-user | 2020-03-31 00:00:13.635253 |              4 | t
-              2 | 1.2     | data        | SQL  | V1.2_data.sql      |  -513598028 | pg-test-user | 2020-03-31 00:00:13.652223 |              2 | t
-              3 | 2.1     | more data   | SQL  | V2.1_more_data.sql |  -389802888 | pg-test-user | 2020-03-31 00:00:13.662568 |              1 | t
+ installed_rank | version | description | type |       script       |  checksum   | installed_by |        installed_on        | execution_time | success
+----------------+---------+-------------+------+--------------------+-------------+--------------+----------------------------+----------------+---------
+              1 | 1.1     | init        | SQL  | V1.1_init.sql      | -1203431891 | pg-test-user | 2020-03-31 23:26:37.806177 |              3 | t
+              2 | 1.2     | data        | SQL  | V1.2_data.sql      |  -513598028 | pg-test-user | 2020-03-31 23:26:37.823252 |              1 | t
+              3 | 2.1     | more data   | SQL  | V2.1_more_data.sql |  -389802888 | pg-test-user | 2020-03-31 23:26:37.832305 |              1 | t
 (3 rows)
 
 pg-test-db=#
