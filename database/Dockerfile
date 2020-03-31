@@ -17,7 +17,7 @@ COPY config /tmp/config
 COPY sql /tmp/sql
 
 # Add repository flyway configuration
-# flyway.sqlMigrationSeparator seaprates Version and Description
+# flyway.sqlMigrationSeparator separates Version and Description
 RUN mv /flyway/conf/flyway.conf /flyway/conf/flyway.conf.original \
   && cp /tmp/config/flyway.conf /flyway/conf/flyway.conf \
   && echo 'flyway.sqlMigrationSeparator=_' >> /flyway/conf/flyway.conf
