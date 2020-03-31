@@ -63,9 +63,9 @@ flyway.password=mypass
 ### SQL scripts
 ```
 find . -name '*.sql'
-./database/sql/v1/V1.1__init.sql
-./database/sql/v1/V1.2__data.sql
-./database/sql/v2/V2.1__more_data.sql
+./database/sql/v1/V1.1_init.sql
+./database/sql/v1/V1.2_data.sql
+./database/sql/v2/V2.1_more_data.sql
 ```
 
 ### Build image that contains config and scripts
@@ -81,13 +81,13 @@ Successfully tagged myflyway:v1
 docker run --rm myflyway:v1 migrate
 Flyway Community Edition 6.3.2 by Redgate
 Database: jdbc:postgresql://172.17.0.2:5432/mytestdb (PostgreSQL 12.2)
-Successfully validated 3 migrations (execution time 00:00.022s)
+Successfully validated 3 migrations (execution time 00:00.013s)
 Creating Schema History table "public"."flyway_schema_history" ...
 Current version of schema "public": << Empty Schema >>
 Migrating schema "public" to version 1.1 - init
 Migrating schema "public" to version 1.2 - data
 Migrating schema "public" to version 2.1 - more data
-Successfully applied 3 migrations to schema "public" (execution time 00:00.053s)
+Successfully applied 3 migrations to schema "public" (execution time 00:00.043s)
 ```
 
 Check database
@@ -98,11 +98,11 @@ psql (12.2)
 Type "help" for help.
 
 mytestdb=> select * from flyway_schema_history;
- installed_rank | version | description | type |       script        |  checksum   | installed_by |        installed_on        | execution_time | success
-----------------+---------+-------------+------+---------------------+-------------+--------------+----------------------------+----------------+---------
-              1 | 1.1     | init        | SQL  | V1.1__init.sql      | -1203431891 | myuser       | 2020-03-30 15:47:49.766175 |              5 | t
-              2 | 1.2     | data        | SQL  | V1.2__data.sql      |  -513598028 | myuser       | 2020-03-30 15:47:49.786407 |              3 | t
-              3 | 2.1     | more data   | SQL  | V2.1__more_data.sql |  -389802888 | myuser       | 2020-03-30 15:47:49.800814 |              1 | t
+ installed_rank | version | description | type |       script       |  checksum   | installed_by |        installed_on        | execution_time | success
+----------------+---------+-------------+------+--------------------+-------------+--------------+----------------------------+----------------+---------
+              1 | 1.1     | init        | SQL  | V1.1_init.sql      | -1203431891 | myuser       | 2020-03-31 22:44:13.880541 |              4 | t
+              2 | 1.2     | data        | SQL  | V1.2_data.sql      |  -513598028 | myuser       | 2020-03-31 22:44:13.896808 |              2 | t
+              3 | 2.1     | more data   | SQL  | V2.1_more_data.sql |  -389802888 | myuser       | 2020-03-31 22:44:13.907754 |              1 | t
 (3 rows)
 
 mytestdb=>
@@ -250,9 +250,9 @@ Type "help" for help.
 pg-test-db=# select * from flyway_schema_history;
  installed_rank | version | description | type |       script        |  checksum   | installed_by |        installed_on        | execution_time | success
 ----------------+---------+-------------+------+---------------------+-------------+--------------+----------------------------+----------------+---------
-              1 | 1.1     | init        | SQL  | V1.1__init.sql      | -1203431891 | pg-test-user | 2020-03-31 00:00:13.635253 |              4 | t
-              2 | 1.2     | data        | SQL  | V1.2__data.sql      |  -513598028 | pg-test-user | 2020-03-31 00:00:13.652223 |              2 | t
-              3 | 2.1     | more data   | SQL  | V2.1__more_data.sql |  -389802888 | pg-test-user | 2020-03-31 00:00:13.662568 |              1 | t
+              1 | 1.1     | init        | SQL  | V1.1_init.sql      | -1203431891 | pg-test-user | 2020-03-31 00:00:13.635253 |              4 | t
+              2 | 1.2     | data        | SQL  | V1.2_data.sql      |  -513598028 | pg-test-user | 2020-03-31 00:00:13.652223 |              2 | t
+              3 | 2.1     | more data   | SQL  | V2.1_more_data.sql |  -389802888 | pg-test-user | 2020-03-31 00:00:13.662568 |              1 | t
 (3 rows)
 
 pg-test-db=#
